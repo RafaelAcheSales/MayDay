@@ -17,16 +17,16 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   focusDistance:
-    overrideState: 0
-    value: 10
+    overrideState: 1
+    value: 4.12
   aperture:
-    overrideState: 0
-    value: 5.6
+    overrideState: 1
+    value: 5.4
   focalLength:
-    overrideState: 0
+    overrideState: 1
     value: 50
   kernelSize:
-    overrideState: 0
+    overrideState: 1
     value: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -64,10 +64,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 2.28
+    value: 3.05
   threshold:
     overrideState: 1
-    value: 0.19
+    value: 0.57
   softKnee:
     overrideState: 1
     value: 0.5
