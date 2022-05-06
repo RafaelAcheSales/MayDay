@@ -5,14 +5,12 @@ namespace Gamekit2D
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
-    public class CharacterController2D : MonoBehaviour
+    public class CharacterController2DOld : MonoBehaviour
     {
         [Tooltip("The Layers which represent gameobjects that the Character Controller can be grounded on.")]
         public LayerMask groundedLayerMask;
         [Tooltip("The distance down to check for ground.")]
         public float groundedRaycastDistance = 0.1f;
-
-
 
         Rigidbody2D m_Rigidbody2D;
         CapsuleCollider2D m_Capsule;
@@ -71,15 +69,6 @@ namespace Gamekit2D
         }
 
         /// <summary>
-        /// This moves a rigidbody with dash force
-        /// </summary>
-        /// <param name="movement">The amount moved in global coordinates relative to the rigidbody2D's position.</param>
-        public void Dash(Vector2 movement)
-        {
-            m_Rigidbody2D.MovePosition(m_CurrentPosition + movement);
-        }
-
-        /// <summary>
         /// This moves the character without any implied velocity.
         /// </summary>
         /// <param name="position">The new position of the character in global space.</param>
@@ -90,7 +79,6 @@ namespace Gamekit2D
             m_CurrentPosition = position;
             m_Rigidbody2D.MovePosition(position);
         }
-
 
         /// <summary>
         /// This updates the state of IsGrounded.  It is called automatically in FixedUpdate but can be called more frequently if higher accurracy is required.

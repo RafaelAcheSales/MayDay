@@ -57,6 +57,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
         type: 3}
+      propertyPath: skillType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
+        type: 3}
       propertyPath: skillState
       value: 0
       objectReference: {fileID: 0}
@@ -206,6 +211,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
         type: 3}
+      propertyPath: skillType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
+        type: 3}
       propertyPath: skillState
       value: 0
       objectReference: {fileID: 0}
@@ -284,6 +294,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 117574958198228552}
     m_Modifications:
+    - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
+        type: 3}
+      propertyPath: skillType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 38764648780376002, guid: 9e4c46e6731db83479a715e6c523f387,
         type: 3}
       propertyPath: skillState

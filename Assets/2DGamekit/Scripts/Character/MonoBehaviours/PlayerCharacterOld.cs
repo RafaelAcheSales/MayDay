@@ -8,10 +8,10 @@ namespace Gamekit2D
 {
     [RequireComponent(typeof(CharacterController2D))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerCharacter : MonoBehaviour
+    public class PlayerCharacterOld : MonoBehaviour
     {
-        static protected PlayerCharacter s_PlayerInstance;
-        static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
+        static protected PlayerCharacterOld s_PlayerInstance;
+        static public PlayerCharacterOld PlayerInstance { get { return s_PlayerInstance; } }
 
         public InventoryController inventoryController
         {
@@ -26,9 +26,6 @@ namespace Gamekit2D
         public BulletPool bulletPool;
         public Transform cameraFollowTarget;
 
-        public float dashSpeed = 5f;
-        public float dashAcceleration = 2f;
-        public float dashReloadTime = 1f;
         public float maxSpeed = 10f;
         public float groundAcceleration = 100f;
         public float groundDeceleration = 100f;
@@ -84,7 +81,6 @@ namespace Gamekit2D
         protected float m_NextShotTime;
         protected bool m_IsFiring;
         protected float m_ShotTimer;
-        protected bool m_canDash = true;
         protected float m_HoldingGunTimeRemaining;
         protected TileBase m_CurrentSurface;
         protected float m_CamFollowHorizontalSpeed;
@@ -117,7 +113,6 @@ namespace Gamekit2D
 
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
-        
 
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
@@ -157,7 +152,7 @@ namespace Gamekit2D
                 m_CamFollowVerticalSpeed = maxVerticalDelta / maxVerticalDeltaDampTime;
             }
 
-            SceneLinkedSMB<PlayerCharacter>.Initialise(m_Animator, this);
+            SceneLinkedSMB<PlayerCharacterOld>.Initialise(m_Animator, this);
 
             m_StartingPosition = transform.position;
             m_StartingFacingLeft = GetFacing() < 0.0f;
@@ -206,9 +201,8 @@ namespace Gamekit2D
 
         void FixedUpdate()
         { 
-            if (!Dash())
-            m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
             m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
+            m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
             m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
             UpdateBulletSpawnPointPositions();
             UpdateCameraFollowTargetPosition();
@@ -339,25 +333,6 @@ namespace Gamekit2D
             rangedAttackAudioPlayer.PlayRandomSound();
         }
 
-        public bool Dash() {
-            // Debug.Log("Dashing " + PlayerInput.Instance.Dash.Down);
-            if (PlayerInput.Instance.Dash.Down && m_canDash) {
-                Debug.Log("Dashing " + m_MoveVector.x);
-                m_MoveVector.x = m_MoveVector.x * dashSpeed;
-                Debug.Log("Dashed " + m_MoveVector.x);
-                m_CharacterController2D.Dash(new Vector2(PlayerInput.Instance.Horizontal.Value * dashSpeed, 0f));
-                StartCoroutine(DashCoroutine());
-                return true;
-            }
-            return false;
-        }
-
-        IEnumerator DashCoroutine() {
-            m_canDash = false;
-            yield return new WaitForSeconds(dashReloadTime);
-            m_canDash = true;
-        }
-
         // Public functions - called mostly by StateMachineBehaviours in the character's Animator Controller but also by Events.
         public void SetMoveVector(Vector2 newMoveVector)
         {
@@ -447,8 +422,6 @@ namespace Gamekit2D
 
         public void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
-            if (Dash())
-                return;
             float desiredSpeed = useInput ? PlayerInput.Instance.Horizontal.Value * maxSpeed * speedScale : 0f;
             float acceleration = useInput && PlayerInput.Instance.Horizontal.ReceivingInput ? groundAcceleration : groundDeceleration;
             m_MoveVector.x = Mathf.MoveTowards(m_MoveVector.x, desiredSpeed, acceleration * Time.deltaTime);

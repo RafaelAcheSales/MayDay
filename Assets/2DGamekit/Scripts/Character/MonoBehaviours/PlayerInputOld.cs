@@ -2,14 +2,14 @@
 
 namespace Gamekit2D
 {
-    public class PlayerInput : InputComponent, IDataPersister
+    public class PlayerInputOld : InputComponent, IDataPersister
     {
-        public static PlayerInput Instance
+        public static PlayerInputOld Instance
         {
             get { return s_Instance; }
         }
 
-        protected static PlayerInput s_Instance;
+        protected static PlayerInputOld s_Instance;
     
     
         public bool HaveControl { get { return m_HaveControl; } }
@@ -19,8 +19,6 @@ namespace Gamekit2D
         public InputButton MeleeAttack = new InputButton(KeyCode.K, XboxControllerButtons.X);
         public InputButton RangedAttack = new InputButton(KeyCode.O, XboxControllerButtons.B);
         public InputButton Jump = new InputButton(KeyCode.Space, XboxControllerButtons.A);
-        public InputButton Dash = new InputButton(KeyCode.LeftShift, XboxControllerButtons.X);
-        public InputButton Shield = new InputButton(KeyCode.LeftControl, XboxControllerButtons.B);
         public InputAxis Horizontal = new InputAxis(KeyCode.D, KeyCode.A, XboxControllerAxes.LeftstickHorizontal);
         public InputAxis Vertical = new InputAxis(KeyCode.W, KeyCode.S, XboxControllerAxes.LeftstickVertical);
         [HideInInspector]
@@ -35,7 +33,7 @@ namespace Gamekit2D
             if (s_Instance == null)
                 s_Instance = this;
             else
-                throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
+                throw new UnityException("There cannot be more than one PlayerInputOld script.  The instances are " + s_Instance.name + " and " + name + ".");
         }
 
         void OnEnable()
@@ -43,7 +41,7 @@ namespace Gamekit2D
             if (s_Instance == null)
                 s_Instance = this;
             else if(s_Instance != this)
-                throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
+                throw new UnityException("There cannot be more than one PlayerInputOld script.  The instances are " + s_Instance.name + " and " + name + ".");
         
             PersistentDataManager.RegisterPersister(this);
         }
@@ -62,7 +60,6 @@ namespace Gamekit2D
             MeleeAttack.Get(fixedUpdateHappened, inputType);
             RangedAttack.Get(fixedUpdateHappened, inputType);
             Jump.Get(fixedUpdateHappened, inputType);
-            Dash.Get(fixedUpdateHappened, inputType);
             Horizontal.Get(inputType);
             Vertical.Get(inputType);
 
@@ -81,7 +78,6 @@ namespace Gamekit2D
             GainControl(MeleeAttack);
             GainControl(RangedAttack);
             GainControl(Jump);
-            GainControl(Dash);
             GainControl(Horizontal);
             GainControl(Vertical);
         }
@@ -95,7 +91,6 @@ namespace Gamekit2D
             ReleaseControl(MeleeAttack, resetValues);
             ReleaseControl(RangedAttack, resetValues);
             ReleaseControl(Jump, resetValues);
-            ReleaseControl(Dash, resetValues);
             ReleaseControl(Horizontal, resetValues);
             ReleaseControl(Vertical, resetValues);
         }
@@ -138,14 +133,14 @@ namespace Gamekit2D
 
         public void LoadData(Data data)
         {
-            Data<bool, bool> playerInputData = (Data<bool, bool>)data;
+            Data<bool, bool> playerInputOldData = (Data<bool, bool>)data;
 
-            if (playerInputData.value0)
+            if (playerInputOldData.value0)
                 MeleeAttack.Enable();
             else
                 MeleeAttack.Disable();
 
-            if (playerInputData.value1)
+            if (playerInputOldData.value1)
                 RangedAttack.Enable();
             else
                 RangedAttack.Disable();

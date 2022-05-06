@@ -389,10 +389,10 @@ MonoBehaviour:
   groundAcceleration: 100
   groundDeceleration: 100
   pushingSpeedProportion: 0.5
-  airborneAccelProportion: 0.1
-  airborneDecelProportion: 0.1
+  airborneAccelProportion: 0.439
+  airborneDecelProportion: 0.508
   gravity: 38
-  jumpSpeed: 16.5
+  jumpSpeed: 13
   jumpAbortSpeedReduction: 100
   hurtJumpAngle: 45
   hurtJumpSpeed: 8
@@ -427,8 +427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960138f0450083543ad1d17e1352019d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
-  invulnerableAfterDamage: 1
+  startingHealth: 1
+  invulnerableAfterDamage: 0
   invulnerabilityDuration: 3
   disableOnDeath: 0
   centreOffset: {x: 0, y: 1}
