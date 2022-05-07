@@ -368,12 +368,14 @@ namespace Gamekit2D
             m_canDash = true;
         }
         public void StartGliding() {
+            Debug.Log("Start Gliding");
             isGliding = true;
             // m_Animator.SetBool(m_HashIsGlidingPara, true);
             gravity = glideSpeed;
         }
 
         public void StopGliding() {
+            Debug.Log("stop gliding");
             isGliding = false;
             // m_Animator.SetBool(m_HashIsGlidingPara, false);
             gravity = normalGravity;
@@ -418,6 +420,10 @@ namespace Gamekit2D
             {
                 m_MoveVector.y = -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier;
             }
+        }
+        public void MultiplyMaxSpeed(float multiplier)
+        {
+            maxSpeed = maxSpeed * multiplier;
         }
 
         public Vector2 GetMoveVector()
