@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1506f7b67235554cb42519c257da979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 999
+  damage: 998
   offset: {x: 0, y: 0}
   size: {x: 900, y: 10}
   offsetBasedOnSpriteFacing: 1
