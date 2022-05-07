@@ -111,6 +111,8 @@ namespace Gamekit2D
         protected readonly int m_HashHorizontalSpeedPara = Animator.StringToHash("HorizontalSpeed");
         protected readonly int m_HashVerticalSpeedPara = Animator.StringToHash("VerticalSpeed");
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
+        protected readonly int m_HashSlidingPara= Animator.StringToHash("Sliding");
+        
         protected readonly int m_HashIsGlidingPara = Animator.StringToHash("Gliding");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
@@ -349,6 +351,13 @@ namespace Gamekit2D
             bullet.spriteRenderer.flipX = facingLeft ^ bullet.bullet.spriteOriginallyFacesLeft;
 
             rangedAttackAudioPlayer.PlayRandomSound();
+        }
+        // public void StartSlide() {
+        //     m_Animator.SetBool(m_HashSlidingPara, true);
+        // }
+
+        public bool CanDash() {
+            return m_canDash;
         }
 
         public bool Dash() {

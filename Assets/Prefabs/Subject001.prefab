@@ -393,11 +393,14 @@ MonoBehaviour:
   facingRightBulletSpawnPoint: {fileID: 110830796424920648}
   bulletPool: {fileID: 4273543739127216}
   cameraFollowTarget: {fileID: 110438621244193240}
-  dashSpeed: 5
+  isGliding: 0
+  glideSpeed: 1.5
+  normalGravity: 32
+  dashSpeed: 6
   numberOfJumps: 1
   maxNumberOfJumps: 2
   dashAcceleration: 5
-  dashReloadTime: 0.001
+  dashReloadTime: 2
   maxSpeed: 7
   groundAcceleration: 100
   groundDeceleration: 100
@@ -405,7 +408,7 @@ MonoBehaviour:
   airborneAccelProportion: 0.439
   airborneDecelProportion: 0.508
   gravity: 38
-  jumpSpeed: 13
+  jumpSpeed: 15
   jumpAbortSpeedReduction: 100
   hurtJumpAngle: 45
   hurtJumpSpeed: 8

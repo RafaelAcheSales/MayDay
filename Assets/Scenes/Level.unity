@@ -604,12 +604,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1746463483 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115893904149248620, guid: 286019982ac60224db16c065002ff3ca,
+--- !u!114 &1746463488 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca,
     type: 3}
   m_PrefabInstance: {fileID: 2599223045391928830}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49de84fa3d321d245bc900e599de015f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1804748239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1901066754691726, guid: bb0018ce3a8caa643b44f8487c34bd25,
@@ -7086,26 +7092,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: dashSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: jumpSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: glideSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: dashReloadTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: maxNumberOfJumps
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
       propertyPath: m_RootOrder
@@ -7203,7 +7189,7 @@ PrefabInstance:
     - target: {fileID: 2039918077187578458, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: skillState
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3010303265094229968, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
@@ -7228,18 +7214,48 @@ PrefabInstance:
     - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: skillState
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1746463483}
+      objectReference: {fileID: 1746463488}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MultiplyMaxSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Gamekit2D.PlayerCharacter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: onSkillActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3945164043964941791, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: skillState
@@ -7313,7 +7329,7 @@ PrefabInstance:
     - target: {fileID: 6553798634718391337, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: skillState
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7895506296069943230, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
