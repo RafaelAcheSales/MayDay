@@ -31,6 +31,7 @@ namespace Gamekit2D
         public Transform cameraFollowTarget;
 
 
+        public float timePenaltyForDying = 20f;
         public bool isGliding = false;
         public float glideSpeed = 3f;
         public int numberOfRaycasts = 2;
@@ -923,6 +924,8 @@ namespace Gamekit2D
             if (resetHealth)
                 damageable.SetHealth(damageable.startingHealth);
 
+            SkillsManager.Instance.AddSkillPoints(1);
+            GameObject.FindObjectOfType<TimerSystem>().RemoveTime(timePenaltyForDying);
             //we reset the hurt trigger, as we don't want the player to go back to hurt animation once respawned
             m_Animator.ResetTrigger(m_HashHurtPara);
             if (m_FlickerCoroutine != null)

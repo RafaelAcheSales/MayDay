@@ -18,6 +18,9 @@ public class SkillsManager : Singleton<SkillsManager>
     public bool IsSkillActive(Skill.SkillType skillType) {
         return skills[skillType].isActive;
     }
+    public void AddSkillPoints(int points) {
+        skillPoints += points;
+    }
 
 
 }

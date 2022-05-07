@@ -8,7 +8,13 @@ public class TimerSystem : MonoBehaviour
     public Text timerText;
     public float timeLeft = 250.0f; //seconds
 
+    Color defaultColor;
+    Color removedColor = Color.red;
 
+
+    private void Start() {
+        defaultColor = timerText.color;
+    }
     
     // Update is called once per frame
     void Update()
@@ -31,5 +37,11 @@ public class TimerSystem : MonoBehaviour
     }
     public void RemoveTime(float amount) {
         timeLeft -= amount;
+        timerText.color = removedColor;
+        StartCoroutine(ResetColor());
+    }
+    IEnumerator ResetColor() {
+        yield return new WaitForSeconds(1f);
+        timerText.color = defaultColor;
     }
 }
