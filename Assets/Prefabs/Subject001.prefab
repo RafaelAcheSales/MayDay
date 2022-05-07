@@ -320,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedLayerMask:
     serializedVersion: 2
-    m_Bits: 2147549184
+    m_Bits: 2147549192
   groundedRaycastDistance: 0.1
 --- !u!114 &4465982211872182
 MonoBehaviour:
@@ -395,8 +395,11 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 110438621244193240}
   isGliding: 0
   glideSpeed: 1.5
+  raycastOffset: 0
+  raycastSize: 0.7
+  wallJumpMultiplier: 1.5
   normalGravity: 32
-  dashSpeed: 6
+  dashSpeed: 4.5
   numberOfJumps: 1
   maxNumberOfJumps: 2
   dashAcceleration: 5

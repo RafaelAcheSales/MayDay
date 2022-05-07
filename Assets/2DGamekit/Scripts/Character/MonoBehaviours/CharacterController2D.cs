@@ -32,6 +32,8 @@ namespace Gamekit2D
         public Collider2D[] GroundColliders { get { return m_GroundColliders; } }
         public ContactFilter2D ContactFilter { get { return m_ContactFilter; } }
 
+        private bool wallGrabbing = false;
+
 
         void Awake()
         {
@@ -47,18 +49,45 @@ namespace Gamekit2D
 
             Physics2D.queriesStartInColliders = false;
         }
+        public Collider2D GetCollider()
+        {
+            return m_Capsule;
+        }
+        public void StartGrabbingWall()
+        {
+            Debug.Log("Start Grabbing Wall");
+            wallGrabbing = true;
+        }
+        public void StopGrabbingWall()
+        {
+            Debug.Log("Stop Grabbing Wall");
+            wallGrabbing = false;
+        }
+        public bool IsGrabbingWall()
+        {
+            return wallGrabbing;
+        }
 
         void FixedUpdate()
         {
-            m_PreviousPosition = m_Rigidbody2D.position;
-            m_CurrentPosition = m_PreviousPosition + m_NextMovement;
-            Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
+            if (wallGrabbing)
+            {
+                m_Rigidbody2D.velocity = Vector2.zero;
+                m_Rigidbody2D.angularVelocity = 0;
+                m_NextMovement = Vector2.zero;
+            } 
+            else
+            {
+                m_PreviousPosition = m_Rigidbody2D.position;
+                m_CurrentPosition = m_PreviousPosition + m_NextMovement;
+                Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
 
-            m_Rigidbody2D.MovePosition(m_CurrentPosition);
-            m_NextMovement = Vector2.zero;
+                m_Rigidbody2D.MovePosition(m_CurrentPosition);
+                m_NextMovement = Vector2.zero;
 
-            CheckCapsuleEndCollisions();
-            CheckCapsuleEndCollisions(false);
+                CheckCapsuleEndCollisions();
+                CheckCapsuleEndCollisions(false);
+            }
         }
 
         /// <summary>

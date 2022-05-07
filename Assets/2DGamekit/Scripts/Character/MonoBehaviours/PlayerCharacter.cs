@@ -33,6 +33,10 @@ namespace Gamekit2D
 
         public bool isGliding = false;
         public float glideSpeed = 3f;
+        public int numberOfRaycasts = 2;
+        public float raycastOffset = 0.2f;
+        public float raycastSize = 0.5f;
+        public float wallJumpMultiplier = 1.5f;
         public float normalGravity = 32f;
         public float dashSpeed = 5f;
         public int numberOfJumps = 1;
@@ -105,6 +109,8 @@ namespace Gamekit2D
         protected Checkpoint m_LastCheckpoint = null;
         protected Vector2 m_StartingPosition = Vector2.zero;
         protected bool m_StartingFacingLeft = false;
+        protected bool m_CanGrabWall = true;
+        protected bool m_isWallOnLeft = false;
 
         protected bool m_InPause = false;
 
@@ -130,7 +136,7 @@ namespace Gamekit2D
 
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
-        
+        protected Vector3 hitUpPoint, hitDownPoint;
 
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
@@ -184,6 +190,7 @@ namespace Gamekit2D
             {
                 m_CurrentPushables.Add(pushable);
             }
+            
         }
 
         void OnTriggerExit2D(Collider2D other)
@@ -195,9 +202,60 @@ namespace Gamekit2D
                     m_CurrentPushables.Remove(pushable);
             }
         }
+        //Check if collided with wall while airborne
+        private void OnCollisionEnter2D(Collision2D other) {
+            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.WallGrab)) return;
+            float rightAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.right);
+            float leftAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.left);
+            bool isWallOnRight = rightAngle > -45f && rightAngle < 45f;
+            bool isWallOnLeft = leftAngle > -45f && leftAngle < 45f;
+            bool isWall = isWallOnRight || isWallOnLeft;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Platform") &&
+             !IsGrounded() && m_CanGrabWall && isWall) {
+                CastRays(isWallOnRight);
+                m_CharacterController2D.StartGrabbingWall();
+                AddJump();
+                m_isWallOnLeft = other.GetContact(0).point.x < transform.position.x;
+                StartCoroutine(WallGrabCoroutine());
+            }
+        }
+        
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(hitUpPoint, 0.4f);
+        }
+        public void CastRays(bool isWallOnRight) {
+            RaycastHit2D hit;
+            Vector2 direction = isWallOnRight ? Vector2.right : Vector2.left;
+            for (int i = 0; i < numberOfRaycasts; i++) {                
+                float yOffset = (i*raycastOffset);
+                Vector3 origin = new Vector3(transform.position.x , transform.position.y + yOffset , 0f);
+                hit = Physics2D.Raycast(origin, direction, raycastSize, LayerMask.GetMask("Platform"));
+                if (hit.collider == null) continue;
+                hitUpPoint = new Vector3(hit.point.x, hit.point.y, -1f);
+                Debug.DrawLine(origin, origin + Vector3.right * raycastSize, Color.red, 1f);
+            }
+            
+           
+            
+        }
+        IEnumerator WallGrabCoroutine() {
+            m_CanGrabWall = false;
+            yield return new WaitForSeconds(1f);
+            m_CanGrabWall = true;
+        }
+        public bool IsGrabbingWall() {
+            return m_CharacterController2D.IsGrabbingWall();
+        }
+        public float StopGrabbingWall() {
+            Debug.Log("Stop grabbing wall");
+            m_CharacterController2D.StopGrabbingWall();
+            return PlayerInput.Instance.Horizontal.Value;
+        }
 
         void Update()
         {
+            CastRays(true);
             if (PlayerInput.Instance.Pause.Down)
             {
                 if (!m_InPause)
@@ -384,7 +442,7 @@ namespace Gamekit2D
         }
 
         public void StopGliding() {
-            Debug.Log("stop gliding");
+            // Debug.Log("stop gliding");
             isGliding = false;
             // m_Animator.SetBool(m_HashIsGlidingPara, false);
             gravity = normalGravity;
@@ -637,6 +695,9 @@ namespace Gamekit2D
 
         public void RemoveJump() {
             numberOfJumps--;
+        }
+        public void AddJump() {
+            numberOfJumps++;
         }
         public bool CheckForJumpInput()
         {
