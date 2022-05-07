@@ -185,7 +185,7 @@ MonoBehaviour:
   damage: 1
   offset: {x: 0, y: 0}
   size: {x: 1.96, y: 0.18}
-  offsetBasedOnSpriteFacing: 1
+  offsetBasedOnSpriteFacing: 0
   spriteRenderer: {fileID: 0}
   canHitTriggers: 0
   disableDamageAfterHit: 0
