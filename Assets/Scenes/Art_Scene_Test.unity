@@ -1468,10 +1468,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2039918077187578458, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3010303265094229968, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_Name
       value: SkillTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945164043964941791, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
@@ -1481,12 +1496,12 @@ PrefabInstance:
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.480067
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.67228
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
@@ -1527,6 +1542,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723614794326661117, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553798634718391337, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654079983324086450, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d33d1ba750a0d489a2c9d12f8da866, type: 3}
@@ -10196,7 +10226,7 @@ PrefabInstance:
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.957
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
