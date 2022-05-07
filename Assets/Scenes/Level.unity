@@ -7080,38 +7080,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: dashSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: dashReloadTime
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: dashAcceleration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: maxHorizontalDeltaDampTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: cameraHorizontalSpeedOffset
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: cameraHorizontalFacingOffset
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465982211872182, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: MeleeAttack.m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465982211872182, guid: 286019982ac60224db16c065002ff3ca, type: 3}
-      propertyPath: RangedAttack.m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
       propertyPath: m_RootOrder
@@ -7299,7 +7267,7 @@ PrefabInstance:
     - target: {fileID: 8479444026323847735, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: skillPoints
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d33d1ba750a0d489a2c9d12f8da866, type: 3}

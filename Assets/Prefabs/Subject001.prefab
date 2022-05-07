@@ -355,6 +355,14 @@ MonoBehaviour:
     key: 32
     controllerButton: 1
     m_Enabled: 1
+  Dash:
+    key: 304
+    controllerButton: 3
+    m_Enabled: 1
+  Shield:
+    key: 306
+    controllerButton: 2
+    m_Enabled: 1
   Horizontal:
     positive: 100
     negative: 97
@@ -385,6 +393,11 @@ MonoBehaviour:
   facingRightBulletSpawnPoint: {fileID: 110830796424920648}
   bulletPool: {fileID: 4273543739127216}
   cameraFollowTarget: {fileID: 110438621244193240}
+  dashSpeed: 5
+  numberOfJumps: 1
+  maxNumberOfJumps: 2
+  dashAcceleration: 5
+  dashReloadTime: 0.001
   maxSpeed: 7
   groundAcceleration: 100
   groundDeceleration: 100
@@ -408,10 +421,10 @@ MonoBehaviour:
   bulletSpeed: 30
   holdingGunTimeoutDuration: 1.5
   rightBulletSpawnPointAnimated: 1
-  cameraHorizontalFacingOffset: 2
-  cameraHorizontalSpeedOffset: 0.2
+  cameraHorizontalFacingOffset: 0.5
+  cameraHorizontalSpeedOffset: 0.1
   cameraVerticalInputOffset: 2
-  maxHorizontalDeltaDampTime: 0.4
+  maxHorizontalDeltaDampTime: 1
   maxVerticalDeltaDampTime: 0.6
   verticalCameraOffsetDelay: 1
   spriteOriginallyFacesLeft: 0

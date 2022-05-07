@@ -27,6 +27,8 @@ namespace Gamekit2D
         public Transform cameraFollowTarget;
 
         public float dashSpeed = 5f;
+        public int numberOfJumps = 1;
+        public int maxNumberOfJumps = 2;
         public float dashAcceleration = 2f;
         public float dashReloadTime = 1f;
         public float maxSpeed = 10f;
@@ -340,6 +342,7 @@ namespace Gamekit2D
         }
 
         public bool Dash() {
+            if(!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Dash)) return false;
             // Debug.Log("Dashing " + PlayerInput.Instance.Dash.Down);
             if (PlayerInput.Instance.Dash.Down && m_canDash) {
                 Debug.Log("Dashing " + m_MoveVector.x);
@@ -588,9 +591,22 @@ namespace Gamekit2D
             m_MoveVector.y -= gravity * Time.deltaTime;
         }
 
+        public bool CanJump()
+        {
+            bool isgrounded = m_CharacterController2D.IsGrounded;
+            if (isgrounded) numberOfJumps = maxNumberOfJumps;
+            return isgrounded || numberOfJumps > 0;
+        }
+
+
         public bool CheckForJumpInput()
         {
-            return PlayerInput.Instance.Jump.Down;
+            bool result = PlayerInput.Instance.Jump.Down && CanJump();
+            if (result)
+            {
+                numberOfJumps -= 1;
+            }
+            return result;
         }
 
         public bool CheckForFallInput()

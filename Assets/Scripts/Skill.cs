@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour
         DoubleJump,
         Dash,
         Glide,
+        Shield,
     }
     public enum SkillState {
         Locked,
