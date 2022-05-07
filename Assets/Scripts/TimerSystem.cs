@@ -7,6 +7,8 @@ public class TimerSystem : MonoBehaviour
 {
     public Text timerText;
     public float timeLeft = 250.0f; //seconds
+
+
     
     // Update is called once per frame
     void Update()
@@ -26,5 +28,8 @@ public class TimerSystem : MonoBehaviour
             SceneManager.LoadSceneAsync("GameOver");
             gameObject.SetActive(false);
         }
+    }
+    public void RemoveTime(float amount) {
+        timeLeft -= amount;
     }
 }
