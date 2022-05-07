@@ -18,10 +18,19 @@ namespace Gamekit2D
                 m_MonoBehaviour.MeleeAttack ();
             m_MonoBehaviour.CheckAndFireGun ();
             m_MonoBehaviour.CheckForCrouching ();
-            if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.DoubleJump)){
-                if (m_MonoBehaviour.CheckForJumpInput())
-                    m_MonoBehaviour.SetVerticalMovement(m_MonoBehaviour.jumpSpeed);
-            }
+            if (m_MonoBehaviour.CheckForJumpInput()) {
+                if ( m_MonoBehaviour.StillHasJumps()) {
+                    if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.DoubleJump)) 
+                        m_MonoBehaviour.SetVerticalMovement(m_MonoBehaviour.jumpSpeed);
+                        m_MonoBehaviour.RemoveJump(); 
+                } else if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.Glide)) {
+                    m_MonoBehaviour.StartGliding();
+                }
+                
+                
+            } 
+            
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Gamekit2D
     public class PlayerCharacter : MonoBehaviour
     {
         static protected PlayerCharacter s_PlayerInstance;
+
+        
+
         static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
 
         public InventoryController inventoryController
@@ -26,6 +30,10 @@ namespace Gamekit2D
         public BulletPool bulletPool;
         public Transform cameraFollowTarget;
 
+
+        public bool isGliding = false;
+        public float glideSpeed = 3f;
+        public float normalGravity = 32f;
         public float dashSpeed = 5f;
         public int numberOfJumps = 1;
         public int maxNumberOfJumps = 2;
@@ -103,6 +111,7 @@ namespace Gamekit2D
         protected readonly int m_HashHorizontalSpeedPara = Animator.StringToHash("HorizontalSpeed");
         protected readonly int m_HashVerticalSpeedPara = Animator.StringToHash("VerticalSpeed");
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
+        protected readonly int m_HashIsGlidingPara = Animator.StringToHash("Gliding");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
         protected readonly int m_HashTimeoutPara = Animator.StringToHash("Timeout");
@@ -140,7 +149,8 @@ namespace Gamekit2D
             hurtJumpAngle = Mathf.Clamp(hurtJumpAngle, k_MinHurtJumpAngle, k_MaxHurtJumpAngle);
             m_TanHurtJumpAngle = Mathf.Tan(Mathf.Deg2Rad * hurtJumpAngle);
             m_FlickeringWait = new WaitForSeconds(flickeringDuration);
-
+            gravity = normalGravity;
+            numberOfJumps = maxNumberOfJumps;
             meleeDamager.DisableDamage();
 
             m_ShotSpawnGap = 1f / shotsPerSecond;
@@ -343,11 +353,8 @@ namespace Gamekit2D
 
         public bool Dash() {
             if(!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Dash)) return false;
-            // Debug.Log("Dashing " + PlayerInput.Instance.Dash.Down);
             if (PlayerInput.Instance.Dash.Down && m_canDash) {
-                Debug.Log("Dashing " + m_MoveVector.x);
                 m_MoveVector.x = m_MoveVector.x * dashSpeed;
-                Debug.Log("Dashed " + m_MoveVector.x);
                 m_CharacterController2D.Dash(new Vector2(PlayerInput.Instance.Horizontal.Value * dashSpeed, 0f));
                 StartCoroutine(DashCoroutine());
                 return true;
@@ -359,6 +366,17 @@ namespace Gamekit2D
             m_canDash = false;
             yield return new WaitForSeconds(dashReloadTime);
             m_canDash = true;
+        }
+        public void StartGliding() {
+            isGliding = true;
+            // m_Animator.SetBool(m_HashIsGlidingPara, true);
+            gravity = glideSpeed;
+        }
+
+        public void StopGliding() {
+            isGliding = false;
+            // m_Animator.SetBool(m_HashIsGlidingPara, false);
+            gravity = normalGravity;
         }
 
         // Public functions - called mostly by StateMachineBehaviours in the character's Animator Controller but also by Events.
@@ -475,6 +493,7 @@ namespace Gamekit2D
                 {//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
                 }
+                m_Animator.SetBool(m_HashIsGlidingPara, false);
             }
             else
                 m_CurrentSurface = null;
@@ -591,24 +610,27 @@ namespace Gamekit2D
             m_MoveVector.y -= gravity * Time.deltaTime;
         }
 
-        public bool CanJump()
+
+        public bool StillHasJumps()
         {
-            bool isgrounded = m_CharacterController2D.IsGrounded;
-            if (isgrounded) numberOfJumps = maxNumberOfJumps;
-            return isgrounded || numberOfJumps > 0;
+            return numberOfJumps > 0;
         }
 
+        public bool IsGrounded() {
+            return m_CharacterController2D.IsGrounded;
+        }
 
+        public void RemoveJump() {
+            numberOfJumps--;
+        }
         public bool CheckForJumpInput()
         {
-            bool result = PlayerInput.Instance.Jump.Down && CanJump();
-            if (result)
-            {
-                numberOfJumps -= 1;
-            }
-            return result;
+            return PlayerInput.Instance.Jump.Down;
         }
-
+        public void ResetJumps()
+        {
+            numberOfJumps = maxNumberOfJumps;
+        }
         public bool CheckForFallInput()
         {
             return PlayerInput.Instance.Vertical.Value < -float.Epsilon && PlayerInput.Instance.Jump.Down;

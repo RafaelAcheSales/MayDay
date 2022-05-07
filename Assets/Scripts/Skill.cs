@@ -79,7 +79,8 @@ public class Skill : MonoBehaviour
         onSkillActivate.Invoke(skillType);
         UpdateColor();
         foreach (Skill skill in GetDownwardSkills())
-            skill.Unlock();
+            if (skill.skillState == SkillState.Locked)
+                skill.Unlock();
         Debug.Log("Activated " + skillType);
         
     }

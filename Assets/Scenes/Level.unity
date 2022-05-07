@@ -7080,6 +7080,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
+      propertyPath: dashSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
+      propertyPath: dashReloadTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
       propertyPath: m_RootOrder
@@ -7174,6 +7182,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2039918077187578458, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3010303265094229968, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_Name
@@ -7194,6 +7207,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3490868429976351679, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945164043964941791, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_RootOrder
@@ -7207,7 +7230,7 @@ PrefabInstance:
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4108185147552164885, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
@@ -7249,6 +7272,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5726551098313294629, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726551098313294629, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553798634718391337, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7895506296069943230, guid: 07d33d1ba750a0d489a2c9d12f8da866,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7268,6 +7306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: skillPoints
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654079983324086450, guid: 07d33d1ba750a0d489a2c9d12f8da866,
+        type: 3}
+      propertyPath: skillState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d33d1ba750a0d489a2c9d12f8da866, type: 3}
