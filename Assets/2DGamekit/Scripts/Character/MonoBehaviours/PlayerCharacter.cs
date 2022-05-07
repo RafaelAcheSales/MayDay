@@ -121,6 +121,7 @@ namespace Gamekit2D
         protected readonly int m_HashSlidingPara= Animator.StringToHash("Sliding");
         
         protected readonly int m_HashIsGlidingPara = Animator.StringToHash("Gliding");
+        protected readonly int m_HashDashPara = Animator.StringToHash("Dash");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
         protected readonly int m_HashTimeoutPara = Animator.StringToHash("Timeout");
@@ -218,6 +219,7 @@ namespace Gamekit2D
                 AddJump();
                 m_isWallOnLeft = other.GetContact(0).point.x < transform.position.x;
                 StartCoroutine(WallGrabCoroutine());
+                StopGliding();
             }
         }
         
@@ -425,6 +427,7 @@ namespace Gamekit2D
             if(!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Dash)) return false;
             if (PlayerInput.Instance.Dash.Down && m_canDash) {
                 m_MoveVector.x = m_MoveVector.x * dashSpeed;
+                m_Animator.SetTrigger(m_HashDashPara);
                 m_CharacterController2D.Dash(new Vector2(PlayerInput.Instance.Horizontal.Value * dashSpeed, 0f));
                 StartCoroutine(DashCoroutine());
                 return true;
@@ -440,14 +443,13 @@ namespace Gamekit2D
         public void StartGliding() {
             Debug.Log("Start Gliding");
             isGliding = true;
-            // m_Animator.SetBool(m_HashIsGlidingPara, true);
+            m_Animator.SetBool(m_HashIsGlidingPara, true);
             gravity = glideSpeed;
         }
 
         public void StopGliding() {
-            // Debug.Log("stop gliding");
             isGliding = false;
-            // m_Animator.SetBool(m_HashIsGlidingPara, false);
+            m_Animator.SetBool(m_HashIsGlidingPara, false);
             gravity = normalGravity;
         }
 
