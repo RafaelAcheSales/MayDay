@@ -81,6 +81,7 @@ namespace Gamekit2D
 
         public bool spriteOriginallyFacesLeft;
 
+        protected Color[] colors = { Color.red, Color.green, Color.blue, Color.yellow };
         protected CharacterController2D m_CharacterController2D;
         protected Animator m_Animator;
         protected CapsuleCollider2D m_Capsule;
@@ -232,8 +233,9 @@ namespace Gamekit2D
                 Vector3 origin = new Vector3(transform.position.x , transform.position.y + yOffset , 0f);
                 hit = Physics2D.Raycast(origin, direction, raycastSize, LayerMask.GetMask("Platform"));
                 if (hit.collider == null) continue;
+                Debug.DrawLine(origin, origin + new Vector3(direction.x, direction.y, 0f) * raycastSize, colors[i], 1f);
+                
                 hitUpPoint = new Vector3(hit.point.x, hit.point.y, -1f);
-                Debug.DrawLine(origin, origin + Vector3.right * raycastSize, Color.red, 1f);
             }
             
            
@@ -241,7 +243,7 @@ namespace Gamekit2D
         }
         IEnumerator WallGrabCoroutine() {
             m_CanGrabWall = false;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             m_CanGrabWall = true;
         }
         public bool IsGrabbingWall() {
@@ -256,6 +258,7 @@ namespace Gamekit2D
         void Update()
         {
             CastRays(true);
+            CastRays(false);
             if (PlayerInput.Instance.Pause.Down)
             {
                 if (!m_InPause)

@@ -7746,6 +7746,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
+      propertyPath: raycastOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 79408613562112, guid: 286019982ac60224db16c065002ff3ca, type: 3}
+      propertyPath: numberOfRaycasts
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114477367007600906, guid: 286019982ac60224db16c065002ff3ca,
         type: 3}
       propertyPath: m_RootOrder

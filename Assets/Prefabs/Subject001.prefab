@@ -395,7 +395,8 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 110438621244193240}
   isGliding: 0
   glideSpeed: 1.5
-  raycastOffset: 0
+  numberOfRaycasts: 2
+  raycastOffset: 0.3
   raycastSize: 0.7
   wallJumpMultiplier: 1.5
   normalGravity: 32
