@@ -31,6 +31,7 @@ namespace Gamekit2D
         public Transform cameraFollowTarget;
 
 
+        public Color shieldColor;
         public float timePenaltyForDying = 20f;
         public float shieldEffectTime = 1f;
         public float shieldReload = 10f;
@@ -144,6 +145,7 @@ namespace Gamekit2D
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
         protected Vector3 hitUpPoint, hitDownPoint;
+        protected Color m_currentColor;
         protected bool m_CanUseShield = true;
 
         // MonoBehaviour Messages - called by Unity internally.
@@ -162,6 +164,7 @@ namespace Gamekit2D
 
         void Start()
         {
+            m_currentColor = spriteRenderer.color;
             hurtJumpAngle = Mathf.Clamp(hurtJumpAngle, k_MinHurtJumpAngle, k_MaxHurtJumpAngle);
             m_TanHurtJumpAngle = Mathf.Tan(Mathf.Deg2Rad * hurtJumpAngle);
             m_FlickeringWait = new WaitForSeconds(flickeringDuration);
@@ -264,7 +267,7 @@ namespace Gamekit2D
         }
         public void UseShield() {
             if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
-            Debug.Log(PlayerInput.Instance.Shield.Held +" " + m_CanUseShield + " " + m_CanUseShield);
+            // Debug.Log(PlayerInput.Instance.Shield.Held +" " + m_CanUseShield + " " + m_CanUseShield);
             if (PlayerInput.Instance.Shield.Down && m_CanUseShield) {
                 Debug.Log("Use shield");
                 m_CanUseShield = false;
@@ -277,8 +280,10 @@ namespace Gamekit2D
         }
         IEnumerator ShieldCoroutine() {
             damageable.EnableInvulnerability();
+            spriteRenderer.color = shieldColor;
             yield return new WaitForSeconds(shieldEffectTime);
             damageable.DisableInvulnerability();
+            spriteRenderer.color = m_currentColor;
 
         }
         IEnumerator ShieldReload() {

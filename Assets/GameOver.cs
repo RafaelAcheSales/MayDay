@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(7f);
-        SceneManager.LoadSceneAsync("Level");
+        SceneManager.LoadSceneAsync("level game");
     }
     
 }

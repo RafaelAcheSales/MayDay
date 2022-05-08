@@ -18,7 +18,7 @@ public class IntroScene : MonoBehaviour
     {
         yield return new WaitForSeconds(7f); 
 
-        SceneManager.LoadSceneAsync("Level");
+        SceneManager.LoadSceneAsync("level game");
         
     }
         
