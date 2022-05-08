@@ -214,8 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1077667444097285479}
-  onTime: 1
-  offTime: 1
+  onTime: 2
+  offTime: 0.5
 --- !u!82 &1077667444097285479
 AudioSource:
   m_ObjectHideFlags: 0
