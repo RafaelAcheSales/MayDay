@@ -540,10 +540,10 @@ MonoBehaviour:
   facingRightBulletSpawnPoint: {fileID: 110830796424920648}
   bulletPool: {fileID: 4273543739127216}
   cameraFollowTarget: {fileID: 110438621244193240}
-  shieldColor: {r: 0, g: 0, b: 0, a: 0}
+  shieldColor: {r: 0.2264151, g: 0.22587655, b: 0.2253471, a: 1}
   timePenaltyForDying: 20
   shieldEffectTime: 1
-  shieldReload: 10
+  shieldReload: 6
   isGliding: 0
   glideSpeed: 1.5
   numberOfRaycasts: 3
