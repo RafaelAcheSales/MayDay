@@ -184,7 +184,7 @@ MonoBehaviour:
   skillState: 0
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
-  skillDetails: Press E to become  invulnerable
+  skillDetails: Increase Shield time
 --- !u!58 &1692506794
 CircleCollider2D:
   m_ObjectHideFlags: 0
