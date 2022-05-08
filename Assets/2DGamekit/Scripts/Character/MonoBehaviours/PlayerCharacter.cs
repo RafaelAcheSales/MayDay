@@ -978,7 +978,9 @@ namespace Gamekit2D
                 UpdateFacing(m_StartingFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_StartingPosition);
             }
+            SkillsManager.Instance.transform.parent.position = transform.position + new Vector3(2, 1, 0);
             respawnAudioPlayer.PlayRandomSound();
+
         }
 
         public void SetChekpoint(Checkpoint checkpoint)
