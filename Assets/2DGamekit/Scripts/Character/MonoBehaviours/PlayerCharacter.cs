@@ -32,6 +32,8 @@ namespace Gamekit2D
 
 
         public float timePenaltyForDying = 20f;
+        public float shieldEffectTime = 1f;
+        public float shieldReload = 10f;
         public bool isGliding = false;
         public float glideSpeed = 3f;
         public int numberOfRaycasts = 2;
@@ -67,6 +69,7 @@ namespace Gamekit2D
         public RandomAudioPlayer hurtAudioPlayer;
         public RandomAudioPlayer meleeAttackAudioPlayer;
         public RandomAudioPlayer rangedAttackAudioPlayer;
+        public RandomAudioPlayer shieldAudioPlayer;
 
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
@@ -140,6 +143,7 @@ namespace Gamekit2D
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
         protected Vector3 hitUpPoint, hitDownPoint;
+        protected bool m_CanUseShield = true;
 
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
@@ -257,29 +261,33 @@ namespace Gamekit2D
             m_CharacterController2D.StopGrabbingWall();
             return PlayerInput.Instance.Horizontal.Value;
         }
+        public void UseShield() {
+            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
+            Debug.Log(PlayerInput.Instance.Shield.Down +" " + m_CanUseShield + " " + m_CanUseShield);
+            if (PlayerInput.Instance.Shield.Down && m_CanUseShield) {
+                Debug.Log("Use shield");
+                m_CanUseShield = false;
+                shieldAudioPlayer.PlayRandomSound();
+                StartCoroutine(ShieldCoroutine());
+                StartCoroutine(ShieldReload());
+                
+            }
+
+        }
+        IEnumerator ShieldCoroutine() {
+            damageable.EnableInvulnerability();
+            yield return new WaitForSeconds(shieldEffectTime);
+            damageable.DisableInvulnerability();
+
+        }
+        IEnumerator ShieldReload() {
+            yield return new WaitForSeconds(shieldReload);
+            m_CanUseShield = true;
+        }
 
         void Update()
         {
-            CastRays(true);
-            CastRays(false);
-            if (PlayerInput.Instance.Pause.Down)
-            {
-                if (!m_InPause)
-                {
-                    if (ScreenFader.IsFading)
-                        return;
-
-                    PlayerInput.Instance.ReleaseControl(false);
-                    PlayerInput.Instance.Pause.GainControl();
-                    m_InPause = true;
-                    Time.timeScale = 0;
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                }
-                else
-                {
-                    Unpause();
-                }
-            }
+            UseShield();
         }
 
         void FixedUpdate()
@@ -913,7 +921,7 @@ namespace Gamekit2D
 
         public void PlayFootstep()
         {
-            footstepAudioPlayer.PlayRandomSound(m_CurrentSurface);
+            footstepAudioPlayer.PlayRandomSound();
             var footstepPosition = transform.position;
             footstepPosition.z -= 1;
             VFXController.Instance.Trigger("DustPuff", footstepPosition, 0, false, null, m_CurrentSurface);
