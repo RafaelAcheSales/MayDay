@@ -115,6 +115,7 @@ public class Skill : MonoBehaviour
         
     }
     private void OnMouseDown() {
+        Debug.Log("Clicked " + skillType + " " + skillState + SkillsManager.Instance.skillPoints);
         if (SkillsManager.Instance.skillPoints <= 0) return;
         if (skillState != SkillState.Unlocked) return;
         SkillsManager.Instance.skillPoints--;

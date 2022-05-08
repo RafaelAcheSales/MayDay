@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f78b792f7af3b42b67e84157592153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillPoints: 0
+  skillPoints: 3
   lockedColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   activeColor: {r: 0.40744036, g: 0.7924528, b: 0.4868164, a: 1}
