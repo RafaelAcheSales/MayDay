@@ -10,9 +10,11 @@ public class SkillsManager : Singleton<SkillsManager>
     public Color lockedColor;
     public Color unlockedColor;
     public Color activeColor;
+    public AudioSource audioSource;
     private void Start() {
         foreach (Skill skill in GetComponentsInChildren<Skill>()) 
             skills.Add(skill.skillType, skill);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public bool IsSkillActive(Skill.SkillType skillType) {

@@ -542,7 +542,7 @@ MonoBehaviour:
   cameraFollowTarget: {fileID: 110438621244193240}
   shieldColor: {r: 0.2264151, g: 0.22587655, b: 0.2253471, a: 1}
   timePenaltyForDying: 20
-  shieldEffectTime: 1
+  shieldEffectTime: 2
   shieldReload: 6
   isGliding: 0
   glideSpeed: 1.5
