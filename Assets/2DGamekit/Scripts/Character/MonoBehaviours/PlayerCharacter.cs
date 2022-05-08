@@ -968,7 +968,7 @@ namespace Gamekit2D
 
             m_Animator.SetTrigger(m_HashRespawnPara);
 
-            if (useCheckpoint && m_LastCheckpoint != null)
+            if (m_LastCheckpoint != null)
             {
                 UpdateFacing(m_LastCheckpoint.respawnFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_LastCheckpoint.transform.position);
@@ -983,6 +983,7 @@ namespace Gamekit2D
 
         public void SetChekpoint(Checkpoint checkpoint)
         {
+            Debug.Log("SetCheckpoint");
             m_LastCheckpoint = checkpoint;
         }
 
