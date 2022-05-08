@@ -73,6 +73,9 @@ namespace Gamekit2D
         public RandomAudioPlayer shieldAudioPlayer;
         public RandomAudioPlayer respawnAudioPlayer;
         public RandomAudioPlayer jumpAudioPlayer;
+        public RandomAudioPlayer dashAudioPlayer;
+        public RandomAudioPlayer glidingAudioPlayer;
+
 
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
@@ -449,6 +452,7 @@ namespace Gamekit2D
             if (PlayerInput.Instance.Dash.Down && m_canDash) {
                 m_MoveVector.x = m_MoveVector.x * dashSpeed;
                 m_Animator.SetTrigger(m_HashDashPara);
+                dashAudioPlayer.PlayRandomSound();
                 m_CharacterController2D.Dash(new Vector2(PlayerInput.Instance.Horizontal.Value * dashSpeed, 0f));
                 StartCoroutine(DashCoroutine());
                 return true;
@@ -465,12 +469,14 @@ namespace Gamekit2D
             Debug.Log("Start Gliding");
             isGliding = true;
             m_Animator.SetBool(m_HashIsGlidingPara, true);
+            glidingAudioPlayer.PlayRandomSound();
             gravity = glideSpeed;
         }
 
         public void StopGliding() {
             isGliding = false;
             m_Animator.SetBool(m_HashIsGlidingPara, false);
+            glidingAudioPlayer.GetComponent<AudioSource>().Stop();
             gravity = normalGravity;
         }
 
