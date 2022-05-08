@@ -72,6 +72,7 @@ namespace Gamekit2D
         public RandomAudioPlayer rangedAttackAudioPlayer;
         public RandomAudioPlayer shieldAudioPlayer;
         public RandomAudioPlayer respawnAudioPlayer;
+        public RandomAudioPlayer jumpAudioPlayer;
 
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
@@ -264,6 +265,10 @@ namespace Gamekit2D
             Debug.Log("Stop grabbing wall");
             m_CharacterController2D.StopGrabbingWall();
             return PlayerInput.Instance.Horizontal.Value;
+        }
+
+        public void AddToShieldEffectTime(float time) {
+            shieldEffectTime += time;
         }
         public void UseShield() {
             if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
@@ -482,6 +487,9 @@ namespace Gamekit2D
 
         public void SetVerticalMovement(float newVerticalMovement)
         {
+            if (newVerticalMovement == jumpSpeed){
+                JumpSound();
+            }
             m_MoveVector.y = newVerticalMovement;
         }
 
@@ -920,6 +928,10 @@ namespace Gamekit2D
             meleeDamager.DisableDamage();
         }
 
+        public void JumpSound() {
+            Debug.Log("JumpSound");
+            jumpAudioPlayer.PlayRandomSound();
+        }
         public void TeleportToColliderBottom()
         {
             Vector2 colliderBottom = m_CharacterController2D.Rigidbody2D.position + m_Capsule.offset + Vector2.down * m_Capsule.size.y * 0.5f;

@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+using Gamekit2D;
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class Skill : MonoBehaviour
 {
@@ -14,19 +15,31 @@ public class Skill : MonoBehaviour
         Dash,
         Glide,
         Shield,
+        IncreaseShield,
         WallGrab,
+
     }
     public enum SkillState {
         Locked,
         Unlocked,
         Active,
     }
+    
+    
 
     public SkillType skillType;
     public SkillState skillState;
-    public UnityEvent<SkillType> onSkillActivate;
+    public float speedMultiplier = 1.2f;
+    public float shieldIncreaseTime = 1f;
+    Dictionary<SkillType, Func<float, bool>> skillActivationCallbacks = new Dictionary<SkillType, Func<float, bool>>() {
+        {SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().MultiplyMaxSpeed(a); return true; }},
+        {SkillType.IncreaseShield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().AddToShieldEffectTime(a); return true; }},
+
+    };
     public string skillDetails;
     
+
+
 
     public bool isActive { get { return skillState == SkillState.Active; } }
 
@@ -83,13 +96,22 @@ public class Skill : MonoBehaviour
     public void Activate()
     {
         skillState = SkillState.Active;
-        onSkillActivate.Invoke(skillType);
         UpdateColor();
         SkillsManager.Instance.audioSource.Play();
         foreach (Skill skill in GetDownwardSkills())
             if (skill.skillState == SkillState.Locked)
                 skill.Unlock();
         Debug.Log("Activated " + skillType);
+        if (!skillActivationCallbacks.ContainsKey(skillType)) return;
+        switch (skillType)
+        {
+            case SkillType.MoveSpeed:
+                skillActivationCallbacks[skillType](speedMultiplier);
+                break;
+            case SkillType.IncreaseShield:
+                skillActivationCallbacks[skillType](shieldIncreaseTime);
+                break;
+        }
         
     }
     private void OnMouseDown() {

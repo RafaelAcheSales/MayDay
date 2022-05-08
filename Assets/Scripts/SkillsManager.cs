@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.Linq;
 public class SkillsManager : Singleton<SkillsManager>
 {
-    public Dictionary<Skill.SkillType, Skill> skills = new Dictionary<Skill.SkillType, Skill>();
+    public List<Tuple<Skill.SkillType, Skill>> skills = new List<Tuple<Skill.SkillType, Skill>>();
+    
     public int skillPoints = 0;
 
     public Color lockedColor;
@@ -13,13 +15,14 @@ public class SkillsManager : Singleton<SkillsManager>
     public AudioSource audioSource;
     private void Start() {
         foreach (Skill skill in GetComponentsInChildren<Skill>()) 
-            skills.Add(skill.skillType, skill);
+            skills.Add(new Tuple<Skill.SkillType, Skill>(skill.skillType, skill));
         audioSource = GetComponent<AudioSource>();
     }
-
+    //returns if any skill of type is active
     public bool IsSkillActive(Skill.SkillType skillType) {
-        return skills[skillType].isActive;
-    }
+        return skills.Any(tuple => tuple.Item1 == skillType && tuple.Item2.skillState == Skill.SkillState.Active);
+    }        
+    
     public void AddSkillPoints(int points) {
         skillPoints += points;
     }
