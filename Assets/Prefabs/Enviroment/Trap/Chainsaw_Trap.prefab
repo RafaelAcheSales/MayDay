@@ -106,7 +106,7 @@ MonoBehaviour:
   canHitTriggers: 0
   disableDamageAfterHit: 0
   forceRespawn: 0
-  ignoreInvincibility: 1
+  ignoreInvincibility: 0
   hittableLayers:
     serializedVersion: 2
     m_Bits: 8192

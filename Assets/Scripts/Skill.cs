@@ -26,6 +26,7 @@ public class Skill : MonoBehaviour
     public SkillState skillState;
     public UnityEvent<SkillType> onSkillActivate;
     public string skillDetails;
+    
 
     public bool isActive { get { return skillState == SkillState.Active; } }
 
@@ -84,6 +85,7 @@ public class Skill : MonoBehaviour
         skillState = SkillState.Active;
         onSkillActivate.Invoke(skillType);
         UpdateColor();
+        SkillsManager.Instance.audioSource.Play();
         foreach (Skill skill in GetDownwardSkills())
             if (skill.skillState == SkillState.Locked)
                 skill.Unlock();
