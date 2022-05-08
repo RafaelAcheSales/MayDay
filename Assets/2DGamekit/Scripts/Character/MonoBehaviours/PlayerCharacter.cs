@@ -70,6 +70,7 @@ namespace Gamekit2D
         public RandomAudioPlayer meleeAttackAudioPlayer;
         public RandomAudioPlayer rangedAttackAudioPlayer;
         public RandomAudioPlayer shieldAudioPlayer;
+        public RandomAudioPlayer respawnAudioPlayer;
 
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
@@ -263,7 +264,7 @@ namespace Gamekit2D
         }
         public void UseShield() {
             if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
-            Debug.Log(PlayerInput.Instance.Shield.Down +" " + m_CanUseShield + " " + m_CanUseShield);
+            Debug.Log(PlayerInput.Instance.Shield.Held +" " + m_CanUseShield + " " + m_CanUseShield);
             if (PlayerInput.Instance.Shield.Down && m_CanUseShield) {
                 Debug.Log("Use shield");
                 m_CanUseShield = false;
@@ -287,11 +288,12 @@ namespace Gamekit2D
 
         void Update()
         {
-            UseShield();
+            
         }
 
         void FixedUpdate()
         { 
+            UseShield();
             if (!Dash())
             m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
             m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
@@ -953,6 +955,7 @@ namespace Gamekit2D
                 UpdateFacing(m_StartingFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_StartingPosition);
             }
+            respawnAudioPlayer.PlayRandomSound();
         }
 
         public void SetChekpoint(Checkpoint checkpoint)

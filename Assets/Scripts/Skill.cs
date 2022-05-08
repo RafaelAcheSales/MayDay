@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class Skill : MonoBehaviour
 {
@@ -23,13 +25,16 @@ public class Skill : MonoBehaviour
     public SkillType skillType;
     public SkillState skillState;
     public UnityEvent<SkillType> onSkillActivate;
+    public string skillDetails;
 
     public bool isActive { get { return skillState == SkillState.Active; } }
 
     private SpriteRenderer spriteRenderer;
+    private Text skillDetailsText;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
         UpdateColor();
 
     }
@@ -92,7 +97,15 @@ public class Skill : MonoBehaviour
         Activate();
     }
 
-    
+    private void OnMouseEnter() {
+        skillDetailsText.text = skillDetails;
+        skillDetailsText.enabled = true;
+    }
+
+    private void OnMouseExit() {
+        skillDetailsText.enabled = false;
+        skillDetailsText.text = "";
+    }
 
 
 }

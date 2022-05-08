@@ -102,6 +102,7 @@ MonoBehaviour:
   onSkillActivate:
     m_PersistentCalls:
       m_Calls: []
+  skillDetails: 
 --- !u!58 &5982966166593607988
 CircleCollider2D:
   m_ObjectHideFlags: 0
