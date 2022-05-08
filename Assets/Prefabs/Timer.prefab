@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 3290874062974637311}
-  timeLeft: 250
+  timeLeft: 420
 --- !u!223 &3290874062156101862
 Canvas:
   m_ObjectHideFlags: 0

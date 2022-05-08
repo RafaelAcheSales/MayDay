@@ -992,7 +992,7 @@ MonoBehaviour:
   raycastSize: 0.7
   wallJumpMultiplier: 1.5
   normalGravity: 32
-  dashSpeed: 4.5
+  dashSpeed: 3
   numberOfJumps: 1
   maxNumberOfJumps: 2
   dashAcceleration: 5
