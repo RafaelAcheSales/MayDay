@@ -364,9 +364,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -1566524933
+  m_SortingLayer: 5
+  m_SortingOrder: 999
   m_Sprite: {fileID: 21300000, guid: 1bafb0055ae3f0b4d9b43977c0e520f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -556,6 +556,7 @@ MonoBehaviour:
   meleeAttackAudioPlayer: {fileID: 4178429579513238}
   rangedAttackAudioPlayer: {fileID: 4396683289210128}
   shieldAudioPlayer: {fileID: 0}
+  respawnAudioPlayer: {fileID: 0}
   shotsPerSecond: 2
   bulletSpeed: 30
   holdingGunTimeoutDuration: 1.5
